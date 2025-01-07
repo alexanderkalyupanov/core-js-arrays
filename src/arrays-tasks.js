@@ -20,8 +20,8 @@
  *    getIntervalArray(0, 100) => [ 0, 1, 2, ..., 100 ]
  *    getIntervalArray(3, 3) => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  return Array.from({ length: end - start + 1 }, (v, i) => start + i);
 }
 
 /**
@@ -37,8 +37,26 @@ function getIntervalArray(/* start, end */) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  let sum;
+  if (arr1.length === arr2.length) {
+    sum = arr1.map((value, index) => {
+      return value + arr2[index];
+    });
+  }
+  if (arr1.length !== arr2.length) {
+    sum = arr1.map((value, index) => {
+      return value + arr2[index];
+    });
+    sum.push(arr2.length);
+  }
+  if (arr1.length === 0) {
+    sum = [...arr2];
+  }
+  if (arr2.length === 0) {
+    sum = [...arr1];
+  }
+  return sum;
 }
 
 /**
@@ -90,8 +108,10 @@ function findAllOccurrences(arr, item) {
  *    removeFalsyValues([ 1, 2, 3, 4, 5, 'false' ]) => [ 1, 2, 3, 4, 5, 'false' ]
  *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
  */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
+function removeFalsyValues(arr) {
+  const falsyValues = [false, null, 0, '', '', undefined, NaN];
+  const mas = arr.filter((item) => falsyValues.includes(item) !== true);
+  return mas || 0;
 }
 
 /**
@@ -122,8 +142,16 @@ function getStringsLength(arr) {
  *   getAverage([ 1, 10, 100, 1000 ])  => 277,75
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
-function getAverage(/* arr */) {
-  throw new Error('Not implemented');
+function getAverage(arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+  const { length } = arr;
+  const sum = arr.reduce((value, acc) => acc + value) / length;
+  if (sum % 2 === 0) {
+    return sum;
+  }
+  return +sum.toFixed(2);
 }
 
 /**
